@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://com.ibm.wbit.comptest.controller"
-            xmlns:Q1="http://com.ibm.wbit.comptest.controller" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="http://com.ibm.wbit.comptest.controller" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <xsd:complexType name="Persona">
-        <xsd:sequence>
-            <xsd:element type="xsd:string" name="name"/>
-            <xsd:element type="xsd:string" name="surname"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <xsd:element name="Rubrica">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Persona" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="Persona">
+        <xsd:complexType>
+            <xsd:sequence>
+
+                <xsd:element name="Anagrafica">
+                    <xsd:complexType>
+                        <xsd:sequence>
+
+                            <xsd:element maxOccurs="1" type="xsd:string" name="nome"/>
+                            <xsd:element maxOccurs="1" type="xsd:string" name="cognome"/>
+                            <xsd:element maxOccurs="1" type="xsd:string" name="indirizzo"/>
+
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element name="Telefono">
+                    <xsd:complexType>
+                        <xsd:sequence>
+
+                            <xsd:element name="numero" minOccurs="1" maxOccurs="unbounded">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="(\+)?[0-9\s\-]{7,20}"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element name="Email">
+                    <xsd:complexType>
+                        <xsd:sequence>
+
+                            <xsd:element name="mail" minOccurs="1" maxOccurs="unbounded">
+                                <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                        <xsd:pattern value="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"/>
+                                    </xsd:restriction>
+                                </xsd:simpleType>
+                            </xsd:element>
+
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+
+                <xsd:element type="xsd:string" minOccurs="1" name="Sito"/>
+
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
 </xsd:schema>
 
