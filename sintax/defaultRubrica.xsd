@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://com.ibm.wbit.comptest.controller" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="http://com.ibm.wbit.comptest.controller" elementFormDefault="qualified"
+            xmlns="http://com.ibm.wbit.comptest.controller" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <xsd:element name="Rubrica">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="Persona" maxOccurs="unbounded"/>
+                <xsd:element ref="Persona" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -30,11 +31,34 @@
                         <xsd:sequence>
 
                             <xsd:element name="numero" minOccurs="1" maxOccurs="unbounded">
-                                <xsd:simpleType>
-                                    <xsd:restriction base="xsd:string">
-                                        <xsd:pattern value="(\+)?[0-9\s\-]{7,20}"/>
-                                    </xsd:restriction>
-                                </xsd:simpleType>
+                                <xsd:complexType>
+                                   <xsd:simpleContent>
+                                       <xsd:restriction base="xsd:string">
+                                           <xsd:simpleType>
+                                               <xsd:restriction>
+                                                   <xsd:pattern value="[0-9\s\-]{7,20}"/>
+                                               </xsd:restriction>
+                                           </xsd:simpleType>
+                                           <xsd:attribute name="tipo">
+                                               <xsd:simpleType>
+                                                   <xsd:restriction base="xsd:string">
+                                                       <xsd:enumeration value="Casa"/>
+                                                       <xsd:enumeration value="Ufficio"/>
+                                                       <xsd:enumeration value="Personale"/>
+                                                       <xsd:enumeration value="Altro"/>
+                                                   </xsd:restriction>
+                                               </xsd:simpleType>
+                                           </xsd:attribute>
+                                           <xsd:attribute name="prefisso" type="xsd:string">
+                                               <xsd:simpleType>
+                                                   <xsd:restriction base="xsd:string">
+                                                       <xsd:pattern value="(\+)?[0-9]{1,4}"/>
+                                                   </xsd:restriction>
+                                               </xsd:simpleType>
+                                           </xsd:attribute>
+                                       </xsd:restriction>
+                                   </xsd:simpleContent>
+                                </xsd:complexType>
                             </xsd:element>
 
                         </xsd:sequence>
