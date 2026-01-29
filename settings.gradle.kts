@@ -1,1 +1,1 @@
-rootProject.name = "Parser"
+rootProject.name = "XML_Parser"
