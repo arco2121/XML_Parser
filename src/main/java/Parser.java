@@ -1,6 +1,4 @@
-import Parser.XMLParser;
-
-public class Main {
+public class Parser {
 
     public static void main(String[] args) {
 
